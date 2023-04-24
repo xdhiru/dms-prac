@@ -7,17 +7,18 @@ class Set
     int size;   // size= number of elements in the set
     int *set;   // the set array itself
     void remove_duplicate_elements();
+
 public:
     void create_set(int set_number);
     void output_set();
     bool is_member(int element);
     bool is_subset(Set set_2);
-    void power_set(); //void because it needs 2d array? so just printed.
+    void power_set(); // void because it needs 2d array? so just printed.
     Set set_union(Set set_2);
     Set set_intersection(Set set_2);
     Set set_difference(Set set_2);
     Set set_symmetric_difference(Set set_2);
-    void set_cartesian_product(Set set_2); //void because it needs 2d array? so just printed.
+    void set_cartesian_product(Set set_2); // void because it needs 2d array? so just printed.
 };
 void Set::create_set(int set_number)
 {
@@ -187,7 +188,11 @@ int main()
     int menu_option = 0;
     while (1)
     {
-        cout << "\n\n0) Exit." << endl;
+        cout << "\n========================\nSet 1 : ";
+        set1.output_set();
+        cout << "\nSet 2 : ";
+        set2.output_set();
+        cout << "\n==========MENU==========\n0) Exit." << endl;
         cout << "1) Check whether an element belongs to the set or not.\n"; // done
         cout << "2) List all the elements of the power set of a set.\n";
         cout << "3) Check whether one set is a subset of the other or not.\n"; // done
@@ -199,11 +204,12 @@ int main()
         switch (menu_option)
         {
         case (0):
+            cout << "====================\nThanks!";
             exit(0);
             break;
         case (1):
             int set_choice, element1;
-            cout << "Which set to search element in:";
+            cout << "====================\nWhich set to search element in:";
             cin >> set_choice;
             cout << "Enter an element to check in set " << set_choice << " : ";
             cin >> element1;
@@ -211,12 +217,12 @@ int main()
             {
                 if (set1.is_member(element1))
                 {
-                    cout << "element " << element1 << " belongs to ";
+                    cout << "Element " << element1 << " belongs to ";
                     set1.output_set();
                 }
                 else
                 {
-                    cout << "element " << element1 << " does not belong to ";
+                    cout << "Element " << element1 << " does not belong to ";
                     set1.output_set();
                 }
             }
@@ -224,12 +230,12 @@ int main()
             {
                 if (set2.is_member(element1))
                 {
-                    cout << "element " << element1 << " belongs to ";
+                    cout << "Element " << element1 << " belongs to ";
                     set2.output_set();
                 }
                 else
                 {
-                    cout << "element " << element1 << " does not belong to ";
+                    cout << "Element " << element1 << " does not belong to ";
                     set2.output_set();
                 }
             }
@@ -239,19 +245,19 @@ int main()
             cin >> set_choice;
             if (set_choice == 1)
             {
-                cout << "The power set of set 1 is :\n";
+                cout << "====================\nThe power set of set 1 is :\n";
                 set1.power_set();
             }
             else if (set_choice == 2)
             {
-                cout << "The power set of set 2 is :\n";
+                cout << "====================\nThe power set of set 2 is :\n";
                 set2.power_set();
             }
             break;
         case (3):
             if (set2.is_subset(set1))
             {
-                cout << "set1 :";
+                cout << "====================\nset1 :";
                 set1.output_set();
                 cout << " is a subset of ";
                 cout << "set2 :";
@@ -259,7 +265,7 @@ int main()
             }
             else
             {
-                cout << "set1 :";
+                cout << "====================\nset1 :";
                 set1.output_set();
                 cout << " is not a subset of ";
                 cout << "set2 :";
@@ -284,16 +290,16 @@ int main()
             }
             break;
         case (4):
-            cout << "The union_set is: ";
+            cout << "========================\nThe union_set is: ";
             (set1.set_union(set2)).output_set();
             cout << "\nThe intersection_set is: ";
             (set1.set_intersection(set2)).output_set();
             break;
         case (5):
             Set universal_set;
-            cout << "Please provide the universal set to find complement of set 1 & set 2:\n";
+            cout << "====================\nPlease provide the universal set to find complement of set 1 & set 2:";
             universal_set.create_set(3);
-            cout << "\n\nComplement of Set 1 : ";
+            cout << "\n====================\nComplement of Set 1 : ";
             set1.output_set();
             cout << " is = ";
             (universal_set.set_difference(set1)).output_set();
@@ -303,8 +309,8 @@ int main()
             (universal_set.set_difference(set2)).output_set();
             break;
         case (6):
-            cout << "\n\n====Set Difference====";
-            cout << "\n\nSet 1 - Set 2 :\n";
+            cout << "\n========================\nSet Difference : ";
+            cout << "\nSet 1 - Set 2 :\n";
             set1.output_set();
             cout << " - ";
             set2.output_set();
@@ -316,8 +322,8 @@ int main()
             set1.output_set();
             cout << " = ";
             (set2.set_difference(set1)).output_set();
-            cout << "\n\n====Set Symmetric Difference====";
-            cout << "\n\nSet 1 (+) Set 2 :\n";
+            cout << "\n========================\nSet Symmetric Difference : ";
+            cout << "\nSet 1 (+) Set 2 : ";
             set1.output_set();
             cout << " (+) ";
             set2.output_set();
@@ -325,8 +331,12 @@ int main()
             (set1.set_symmetric_difference(set2)).output_set();
             break;
         case (7):
-            cout << "\n\n====Cartesian Product====";
-            cout << "\n\nSet 1 x Set 2 :\n";
+            cout << "\n========================\nCartesian Product : ";
+            cout << "\nSet 1 x Set 2 : ";
+            set1.output_set();
+            cout << " x";
+            set2.output_set();
+            cout << " = " << endl;
             set1.set_cartesian_product(set2);
             break;
         }
