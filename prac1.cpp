@@ -185,13 +185,13 @@ int main()
     Set set1, set2;
     set1.create_set(1);
     set2.create_set(2);
+    cout << "\n========================\nSet 1 : ";
+    set1.output_set();
+    cout << "\nSet 2 : ";
+    set2.output_set();
     int menu_option = 0;
     while (1)
     {
-        cout << "\n========================\nSet 1 : ";
-        set1.output_set();
-        cout << "\nSet 2 : ";
-        set2.output_set();
         cout << "\n==========MENU==========\n0) Exit." << endl;
         cout << "1) Check whether an element belongs to the set or not.\n"; // done
         cout << "2) List all the elements of the power set of a set.\n";
@@ -209,7 +209,7 @@ int main()
             break;
         case (1):
             int set_choice, element1;
-            cout << "====================\nWhich set to search element in:";
+            cout << "====================\nWhich set to search element in (1/2):";
             cin >> set_choice;
             cout << "Enter an element to check in set " << set_choice << " : ";
             cin >> element1;
@@ -241,7 +241,7 @@ int main()
             }
             break;
         case (2):
-            cout << "Which set to list power set of:";
+            cout << "Which set to list power set of (1/2):";
             cin >> set_choice;
             if (set_choice == 1)
             {
