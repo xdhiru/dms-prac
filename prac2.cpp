@@ -4,128 +4,63 @@ using namespace std;
 class Relation
 {
 public:
-    int *set1, set_element_count;;
-    int **mat;
-    int *relation,relation_element_count;
+    int **mat, size;
     Relation()
     {
-        inputSet();
-        displaySet();
-        inputRelation();
-        removeDuplicates();
-        displayRelation();
         createMatrix();
-        fillMatrix();
         displayMatrix();
-        if (isReflexive())
-        {
-            cout << "\nThe relation is reflexive" << endl;
+        if (isReflexive()){
+            cout<<"The relation is Reflexive Relation.\n";
+        }else{
+            cout<<"The relation is not Reflexive Relation.\n";
         }
-        else
-        {
-            cout << "\nThe relation is not reflexive" << endl;
+        if (isSymmetric()){
+            cout<<"The relation is Symmetric Relation.\n";
+        }else{
+            cout<<"The relation is not Symmetric Relation.\n";
         }
-    }
-    void inputSet(){
-        cout << "Enter the numebr of elements of set over which relation is defined:";
-        cin >> set_element_count;
-        set1 = new int[set_element_count];
-        for (int i = 0; i < set_element_count; i++)
-        {
-            cout << "Enter element " << i + 1 << " of the set :";
-            cin >> set1[i];
+        if (isAntiSymmetric()){
+            cout<<"The relation is Anti Symmetric Relation.\n";
+        }else{
+            cout<<"The relation is not Anti Symmetric Relation.\n";
         }
-    }
-    void displaySet(){
-        cout << "Entered set : {";
-        for (int i = 0; i < set_element_count; i++)
-        {
-            cout << set1[i] << ", ";
+        if (isTransitive()){
+            cout<<"The relation is Transitive Relation.\n";
+        }else{
+            cout<<"The relation is not Transitive Relation.\n";
         }
-        cout << " }\n";
-    }
-    void inputRelation(){
-        cout << "Enter number of elements in the relation :";
-        cin >> relation_element_count;
-        relation = new int[relation_element_count];
-        for (int i = 0; i < relation_element_count * 2; i += 2)
-        {
-            cout << "Enter value 1 of element " << i / 2 + 1 << " : ";
-            cin >> relation[i];
-            cout << "Enter value 2 of element " << i / 2 + 1 << " : ";
-            cin >> relation[i + 1];
+        if (isEquivalence()){
+            cout<<"The relation is Equivalence Relation.\n";
+        }else{
+            cout<<"The relation is not Equivalece Relation.\n";
         }
-    }
-    void displayRelation()
-    {
-        cout << "Entered relation is : " << endl;
-        cout << "{ ";
-        for (int i = 0; i < relation_element_count * 2; i += 2)
-        {
-            cout << "{" << relation[i] << "," << relation[i + 1] << "}, ";
-        }
-        cout << " }" << endl;
-    }
-    void removeDuplicates()
-    {
-        for (int i = 0; i < relation_element_count * 2; i += 2)
-        {
-            for (int j = i + 2; j < relation_element_count * 2; j += 2)
-            {
-                if (relation[i] == relation[j] && relation[i + 1] == relation[j + 1])
-                {
-                    for (int k = j; k < relation_element_count * 2; k += 2)
-                    {
-                        relation[k] = relation[k + 2];
-                        relation[k + 1] = relation[k + 3];
-                        relation_element_count--;
-                        j -= 2;
-                        i -= 2;
-                    }
-                }
-            }
+        if (isPartialOrder()){
+            cout<<"The relation is Partial Order Relation.\n";
+        }else{
+            cout<<"The relation is not Partial Order Relation.\n";
         }
     }
     void createMatrix()
     {
-        mat = new int *[set_element_count];
-        for (int i = 0; i < set_element_count; i++)
+        cout << "Enters size of matrix :";
+        cin >> size;
+        mat = new int *[size];
+        for (int i = 0; i < size; i++)
         {
-            mat[i] = new int[set_element_count];
-            for (int j = 0; j < set_element_count; j++)
+            mat[i] = new int[size];
+            for (int j = 0; j < size; j++)
             {
-                mat[i][j] = 0;
+                cout << "Enter value(0/1) at " << i << "," << j << " : ";
+                cin >> mat[i][j];
             }
-        }
-    }
-    void fillMatrix()
-    {
-        int x, y;
-        for (int i = 0; i < relation_element_count * 2; i += 2)
-        {
-            x = relation[i];
-            y = relation[i + 1];
-            mat[x][y] = 1;
         }
     }
     void displayMatrix()
     {
-        cout << "   ";
-        for (int i = 0; i < set_element_count; i++)
+        cout << "\nEntered matrix is: \n";
+        for (int i = 0; i < size; i++)
         {
-            cout << set1[i] << ", ";
-        }
-        cout << endl
-             << "__";
-        for (int i = 0; i < set_element_count; i++)
-        {
-            cout << "___";
-        }
-        cout << endl;
-        for (int i = 0; i < set_element_count; i++)
-        {
-            cout << set1[i] << " |";
-            for (int j = 0; j < set_element_count; j++)
+            for (int j = 0; j < size; j++)
             {
                 cout << mat[i][j] << ", ";
             }
@@ -134,24 +69,52 @@ public:
     }
     bool isReflexive()
     {
-        for (int i = 0; i < set_element_count; i++)
+        for (int i = 0; i < size; i++)
         {
-            if (!mat[i][i])
+            if (mat[i][i] != 1)
             {
                 return 0;
             }
         }
         return 1;
     }
+    bool isSymmetric()
+    {
+        for (int i = 0; i < size; ++i)
+        {
+            for (int j = 0; j < size; ++j)
+            {
+                if (mat[i][j] != mat[j][i])
+                {
+                    return 0;
+                }
+            }
+        }
+        return 1;
+    }
+    bool isAntiSymmetric()
+    {
+        for (int i = 0; i < size; ++i)
+        {
+            for (int j = 0; j < size; ++j)
+            {
+                if (mat[i][j] == 1 && mat[j][i] == 1 && i != j)
+                {
+                    return 0;
+                }
+            }
+        }
+        return 1;
+    }
     bool isTransitive()
     {
-        for (int i = 0; i < set_element_count; i++)
+        for (int i = 0; i < size; ++i)
         {
-            for (int j = 0; j < set_element_count; j++)
+            for (int j = 0; j < size; ++j)
             {
                 if (mat[i][j] == 1)
                 {
-                    for (int k = 0; k < set_element_count; k++)
+                    for (int k = 0; k < size; ++k)
                     {
                         if (mat[j][k] == 1 && mat[i][k] != 1)
                         {
@@ -163,8 +126,13 @@ public:
         }
         return 1;
     }
+    bool isEquivalence(){
+        return isReflexive()&&isSymmetric()&&isTransitive();
+    }
+    bool isPartialOrder(){
+        return isReflexive()&&isAntiSymmetric()&&isTransitive();
+    }
 };
-
 int main()
 {
     Relation R;
