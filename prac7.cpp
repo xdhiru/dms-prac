@@ -45,14 +45,13 @@ public:
                     getch();
                     exit(0);
                 }
-                if (i == j)
+                mat[i][j] += 1;
+                if (i == j) 
                 {
-                    mat[i][y] += 2;
-                    j += 2;
+                    j += 2;        //self loop counts as degree 2
                 }
                 else
                 {
-                    mat[i][y] += 1;
                     j++;
                 }
             }
@@ -76,10 +75,11 @@ public:
         {
             cout << "\nEntered graph is not a complete graph." << endl;
         }
-        displayMatrix();
+        displayList();
     }
     bool checkGraph()
     {
+
         for (int i = 0; i < vertices; i++)
         {
             int x_sum = 0, y_sum = 0;
@@ -101,16 +101,19 @@ public:
         {
             for (int j = 0; j < vertices; j++)
             {
-                if (mat[i][j] > 1)
-                {
-                    return 0;
-                }
                 if (i == j && mat[i][j] != 0)
                 {
+                    cout << "Self loop found!" << endl;
+                    return 0;
+                }
+                if (mat[i][j] > 1)
+                {
+                    cout << "Multiple edges found between same vertices!" << endl;
                     return 0;
                 }
                 if (i != j && mat[i][j] != 1)
                 {
+                    cout << "Some vertices are not connected to the others!" << endl;
                     return 0;
                 }
             }
@@ -121,6 +124,24 @@ public:
     {
         cout << "\nThe Adjacency Matrix is :\n";
         cout << "|    |";
+        for (int i = 0; i < vertices; i++)
+        {
+            cout << " V" << i << "|";
+        }
+        cout << endl;
+        for (int i = 0; i < vertices; i++)
+        {
+            cout << "| V" << i;
+            for (int j = 0; j < vertices; j++)
+            {
+                cout << " | " << mat[i][j];
+            }
+            cout << " | " << endl;
+        }
+    }
+    void displayList()
+    {
+        cout << "\nThe Adjacency List is :\n";
         for (int i = 0; i < vertices; i++)
         {
             cout << " V" << i << "|";

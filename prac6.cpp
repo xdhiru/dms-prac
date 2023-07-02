@@ -1,8 +1,6 @@
-// Q6. Write a Program to check if a given graph is a complete graph. Represent the graph using the Adjacency Matrix representation
 #include <iostream>
 #include <conio.h>
 using namespace std;
-string a;
 class Graph
 {
 public:
@@ -45,8 +43,8 @@ public:
                     getch();
                     exit(0);
                 }
-                mat[i][j] += 1;
-                if (i == j) 
+                mat[i][y] += 1;
+                if (i == y) 
                 {
                     j += 2;        //self loop counts as degree 2
                 }
