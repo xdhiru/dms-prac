@@ -1,8 +1,8 @@
 #include <iostream>
 using namespace std;
-void computeDegree(int graph[][100], int numVertices) {
-    int inDegree[numVertices] = {0};
-    int outDegree[numVertices] = {0};
+void Degree(int graph[][100], int numVertices) {
+    int inDegree[numVertices];
+    int outDegree[numVertices];
     for (int i = 0; i < numVertices; ++i) {
         for (int j = 0; j < numVertices; ++j) {
             if (graph[i][j] == 1) {
@@ -26,6 +26,6 @@ int main() {
             cin >> graph[i][j];
         }
     }
-    computeDegree(graph, numVertices);
+    Degree(graph, numVertices);
     return 0;
 }

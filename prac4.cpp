@@ -2,8 +2,6 @@
 #include <conio.h>
 using namespace std;
 
-const int maxN = 10;
-
 int main()
 {
     int n, C;
@@ -19,10 +17,10 @@ int main()
         return 0;
     }
     cout << "Solutions found for the equation are :" << endl;
-    int ans[maxN] = {0};
+    int ans[10] = {0,0,0,0,0,0,0,0,0,0};
+    int sum = 0;
     while (1)
     {
-        int sum = 0;
         for (int i = 0; i < n; i++)
         {
             sum += ans[i];
@@ -36,8 +34,9 @@ int main()
             cout << endl;
         }
         int i = n - 1;
-        while (i >= 0 && ans[i] == C)
+        while (i >= 0 && sum == C)
         {
+            sum-=ans[i];
             ans[i] = 0;
             i--;
         }
@@ -46,6 +45,7 @@ int main()
             break;
         }
         ans[i]++;
+        sum=0;
     }
     return 0;
 }
